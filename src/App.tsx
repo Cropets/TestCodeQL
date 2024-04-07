@@ -3,6 +3,12 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  function vulnerableFunction(userInput: string) {
+    eval(userInput);
+}
+
+let userInput = "alert('Hello, world!');";
+vulnerableFunction(userInput);
   return (
     <div className="App">
       <header className="App-header">
