@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -8,8 +8,23 @@ function App() {
 }
 
 let userInput = "alert('Hello, world!');";
+
 vulnerableFunction(userInput);
-  return (
+
+function filterScript(html) {
+  var scriptRegex = /<script\b[^>]*>([\s\S]*?)<\/script>/gi;
+  var match;
+  while ((match = scriptRegex.exec(html)) !== null) {
+      html = html.replace(match[0], match[1]);
+  }
+  return html;
+}
+
+useEffect( () => {
+  filterScript("<script>")
+}, []);
+
+return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
